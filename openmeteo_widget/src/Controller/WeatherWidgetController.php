@@ -30,8 +30,8 @@ final class WeatherWidgetController extends ControllerBase {
    *   The weather cache service.
    * @param \Drupal\openmeteo_widget\Service\OpenMeteoClient $meteoClient
    *   The Open-Meteo client.
-   * @param \Drupal\Core\Session\AccountInterface $currentUser
-   *   The current user.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user account.
    * @param \Drupal\user\UserDataInterface $userData
    *   The user data service.
    * @param \Drupal\openmeteo_widget\Service\GeocodingClient $geocodingClient
@@ -41,7 +41,7 @@ final class WeatherWidgetController extends ControllerBase {
     private readonly CityManager $cityManager,
     private readonly WeatherCache $weatherCache,
     private readonly OpenMeteoClient $meteoClient,
-    private readonly AccountInterface $currentUser,
+    private readonly AccountInterface $account,
     private readonly UserDataInterface $userData,
     private readonly GeocodingClient $geocodingClient,
   ) {}
@@ -149,11 +149,11 @@ final class WeatherWidgetController extends ControllerBase {
     }
 
     // Save preference.
-    if ($this->currentUser->isAuthenticated()) {
+    if ($this->account->isAuthenticated()) {
       // Save to user data.
       $this->userData->set(
         'openmeteo_widget',
-        $this->currentUser->id(),
+        $this->account->id(),
         'selected_city',
         $cityId
       );

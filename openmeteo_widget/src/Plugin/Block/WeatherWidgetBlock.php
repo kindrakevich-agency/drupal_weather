@@ -40,8 +40,8 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
    *   The weather cache service.
    * @param \Drupal\openmeteo_widget\Service\OpenMeteoClient $meteoClient
    *   The Open-Meteo client.
-   * @param \Drupal\Core\Session\AccountInterface $currentUser
-   *   The current user.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user account.
    * @param \Drupal\user\UserDataInterface $userData
    *   The user data service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
@@ -54,7 +54,7 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
     private readonly CityManager $cityManager,
     private readonly WeatherCache $weatherCache,
     private readonly OpenMeteoClient $meteoClient,
-    private readonly AccountInterface $currentUser,
+    private readonly AccountInterface $account,
     private readonly UserDataInterface $userData,
     private readonly RequestStack $requestStack,
   ) {
@@ -138,10 +138,10 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
    */
   private function getSelectedCity(array $cities): ?array {
     // For authenticated users, check user data.
-    if ($this->currentUser->isAuthenticated()) {
+    if ($this->account->isAuthenticated()) {
       $cityId = $this->userData->get(
         'openmeteo_widget',
-        $this->currentUser->id(),
+        $this->account->id(),
         'selected_city'
       );
 
