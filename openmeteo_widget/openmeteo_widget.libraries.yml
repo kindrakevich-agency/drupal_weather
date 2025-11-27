@@ -9,9 +9,8 @@ weather_widget:
 
 weather_widget_tailwind:
   version: 1.0
-  css:
-    theme:
-      //cdn.tailwindcss.com: { type: external, minified: true }
+  js:
+    https://cdn.tailwindcss.com: { type: external, minified: true }
 
 city_autocomplete:
   version: 1.0
