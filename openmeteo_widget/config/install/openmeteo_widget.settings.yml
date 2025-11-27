@@ -2,6 +2,7 @@ api_endpoint: ''
 api_key: ''
 enable_caching: true
 use_tailwind_cdn: true
+use_openweather_icons: false
 last_cron_run: null
 cities:
   madrid:

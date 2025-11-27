@@ -179,4 +179,34 @@ final class OpenMeteoClient {
     };
   }
 
+  /**
+   * Gets OpenWeather icon URL for a weather code.
+   *
+   * @param int $code
+   *   The WMO weather code.
+   * @param bool $isDay
+   *   Whether it's daytime (default TRUE).
+   *
+   * @return string
+   *   The OpenWeather icon URL.
+   */
+  public function getOpenWeatherIconUrl(int $code, bool $isDay = TRUE): string {
+    $iconCode = match (true) {
+      $code === 0 => $isDay ? '01d' : '01n',
+      $code === 1 => $isDay ? '02d' : '02n',
+      $code === 2 => $isDay ? '03d' : '03n',
+      $code === 3 => '04d',
+      $code >= 45 && $code <= 48 => '50d',
+      $code >= 51 && $code <= 57 => '09d',
+      $code >= 61 && $code <= 67 => '10d',
+      $code >= 71 && $code <= 77 => '13d',
+      $code >= 80 && $code <= 82 => '09d',
+      $code >= 85 && $code <= 86 => '13d',
+      $code >= 95 && $code <= 99 => '11d',
+      default => '01d',
+    };
+
+    return "https://openweathermap.org/img/wn/{$iconCode}@2x.png";
+  }
+
 }

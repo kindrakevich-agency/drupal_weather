@@ -14,6 +14,9 @@ openmeteo_widget.settings:
     use_tailwind_cdn:
       type: boolean
       label: 'Use Tailwind CDN'
+    use_openweather_icons:
+      type: boolean
+      label: 'Use OpenWeather Icons'
     last_cron_run:
       type: integer
       label: 'Last Cron Run Timestamp'

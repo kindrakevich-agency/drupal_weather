@@ -275,12 +275,14 @@ final class WeatherWidgetController extends ControllerBase {
       '#selected_city' => $selectedCity,
       '#weather_data' => $weatherData,
       '#meteo_client' => $this->meteoClient,
+      '#use_openweather_icons' => $config->get('use_openweather_icons') ?? FALSE,
       '#attached' => [
         'library' => $libraries,
       ],
       '#cache' => [
         'max-age' => 3600,
         'contexts' => ['user', 'cookies:openmeteo_city', 'url.query_args:city'],
+        'tags' => ['config:openmeteo_widget.settings'],
       ],
     ];
   }

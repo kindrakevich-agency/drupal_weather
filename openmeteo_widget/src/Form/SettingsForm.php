@@ -131,6 +131,13 @@ final class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Load TailwindCSS from CDN for widget styling. Disable if your theme already includes Tailwind or you want to use custom styles.'),
     ];
 
+    $form['display']['use_openweather_icons'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use OpenWeather icons'),
+      '#default_value' => $config->get('use_openweather_icons') ?? FALSE,
+      '#description' => $this->t('Use OpenWeather icon images instead of built-in SVG icons. OpenWeather provides colorful, detailed weather icons.'),
+    ];
+
     $form['cities'] = [
       '#type' => 'details',
       '#title' => $this->t('City Management'),
@@ -232,6 +239,7 @@ final class SettingsForm extends ConfigFormBase {
       ->set('api_key', $form_state->getValue('api_key'))
       ->set('enable_caching', (bool) $form_state->getValue('enable_caching'))
       ->set('use_tailwind_cdn', (bool) $form_state->getValue('use_tailwind_cdn'))
+      ->set('use_openweather_icons', (bool) $form_state->getValue('use_openweather_icons'))
       ->save();
 
     // Handle city removal.

@@ -124,6 +124,7 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
       '#selected_city' => $selectedCity,
       '#weather_data' => $weatherData,
       '#meteo_client' => $this->meteoClient,
+      '#use_openweather_icons' => $config->get('use_openweather_icons') ?? FALSE,
       '#attached' => [
         'library' => $libraries,
       ],

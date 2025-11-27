@@ -15,7 +15,6 @@
     {# City Selector #}
     {% if cities|length > 1 %}
       <div class="mb-6">
-        <label for="city-selector" class="block text-sm font-medium text-gray-700 mb-2">{{ 'Select City'|t }}</label>
         <select id="city-selector" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
           {% for city_id, city in cities %}
             <option value="{{ city.id }}" {% if selected_city.id == city.id %}selected{% endif %}>
@@ -27,14 +26,14 @@
     {% endif %}
 
     {# Header #}
-    <div class="flex justify-between items-start mb-8">
-      <div>
+    <div class="flex flex-col md:flex-row justify-between items-start mb-8">
+      <div class="text-left mb-4 md:mb-0">
         <h1 class="text-3xl font-normal mb-1">{{ selected_city.name }}</h1>
         <p class="text-gray-500 text-lg">
           {{ weather_data.current.time|date('l, g:i A') }}
         </p>
       </div>
-      <div class="text-right text-gray-600">
+      <div class="text-left md:text-right text-gray-600">
         <p class="mb-1">{{ 'Humidity'|t }}: {{ weather_data.current.humidity }}%</p>
         <p class="mb-1">{{ 'Precipitation'|t }}: {{ weather_data.current.precipitation_probability }}%</p>
         <p>{{ 'Wind'|t }}: {{ weather_data.current.wind_speed }} km/h</p>
@@ -44,7 +43,13 @@
     {# Current Temperature #}
     <div class="flex items-center gap-6 mb-12">
       <div class="weather-icon-wrapper">
-        {{ _self.weather_icon(meteo_client.getWeatherIcon(weather_data.current.weather_code)) }}
+        {% if use_openweather_icons %}
+          <img src="{{ meteo_client.getOpenWeatherIconUrl(weather_data.current.weather_code) }}"
+               alt="{{ meteo_client.getWeatherDescription(weather_data.current.weather_code) }}"
+               class="w-24 h-24">
+        {% else %}
+          {{ _self.weather_icon(meteo_client.getWeatherIcon(weather_data.current.weather_code)) }}
+        {% endif %}
       </div>
       <div class="flex items-start">
         <span class="text-9xl font-bold leading-none">{{ weather_data.current.temperature|round }}</span>
@@ -67,7 +72,13 @@
             {{ day.date|date('D j') }}
           </div>
           <div class="weather-icon-small mx-auto mb-4">
-            {{ _self.weather_icon(meteo_client.getWeatherIcon(day.weather_code)) }}
+            {% if use_openweather_icons %}
+              <img src="{{ meteo_client.getOpenWeatherIconUrl(day.weather_code) }}"
+                   alt="{{ meteo_client.getWeatherDescription(day.weather_code) }}"
+                   class="w-16 h-16 mx-auto">
+            {% else %}
+              {{ _self.weather_icon(meteo_client.getWeatherIcon(day.weather_code)) }}
+            {% endif %}
           </div>
           <div class="font-semibold">
             <span class="text-xl">{{ day.temp_max|round }}°</span>
