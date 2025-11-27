@@ -1,0 +1,9 @@
+name: 'Open-Meteo Weather Widget'
+type: module
+description: 'A production-ready weather widget using Open-Meteo API with multilanguage support, city selection, and intelligent caching.'
+core_version_requirement: ^11
+package: 'Weather'
+dependencies:
+  - drupal:block
+  - drupal:user
+configure: openmeteo_widget.settings

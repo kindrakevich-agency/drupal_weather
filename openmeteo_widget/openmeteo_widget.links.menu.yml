@@ -1,0 +1,6 @@
+openmeteo_widget.settings:
+  title: 'Open-Meteo Weather Widget'
+  description: 'Configure weather widget settings, manage cities, and control caching.'
+  parent: system.admin_config_services
+  route_name: openmeteo_widget.settings
+  weight: 10

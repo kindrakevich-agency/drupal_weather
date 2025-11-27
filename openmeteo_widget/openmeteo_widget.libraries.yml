@@ -1,0 +1,11 @@
+weather_widget:
+  version: 1.0
+  js:
+    js/weather-widget.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/drupalSettings
+  css:
+    theme:
+      //cdn.tailwindcss.com: { type: external, minified: true }

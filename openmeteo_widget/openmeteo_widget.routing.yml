@@ -1,0 +1,36 @@
+openmeteo_widget.settings:
+  path: '/admin/config/services/openmeteo-widget'
+  defaults:
+    _form: '\Drupal\openmeteo_widget\Form\SettingsForm'
+    _title: 'Open-Meteo Weather Widget Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+openmeteo_widget.ajax_get_weather:
+  path: '/openmeteo-widget/weather/{city_id}'
+  defaults:
+    _controller: '\Drupal\openmeteo_widget\Controller\WeatherWidgetController::getWeather'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+openmeteo_widget.ajax_save_preference:
+  path: '/openmeteo-widget/save-preference'
+  defaults:
+    _controller: '\Drupal\openmeteo_widget\Controller\WeatherWidgetController::savePreference'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+openmeteo_widget.fetch_now:
+  path: '/admin/config/services/openmeteo-widget/fetch'
+  defaults:
+    _controller: '\Drupal\openmeteo_widget\Controller\WeatherWidgetController::fetchNow'
+    _title: 'Fetch Weather Now'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    no_cache: TRUE

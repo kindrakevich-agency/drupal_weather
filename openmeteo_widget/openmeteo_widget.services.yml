@@ -1,0 +1,21 @@
+services:
+  openmeteo_widget.client:
+    class: Drupal\openmeteo_widget\Service\OpenMeteoClient
+    arguments:
+      - '@http_client'
+      - '@config.factory'
+      - '@logger.factory'
+
+  openmeteo_widget.city_manager:
+    class: Drupal\openmeteo_widget\Service\CityManager
+    arguments:
+      - '@entity_type.manager'
+      - '@config.factory'
+
+  openmeteo_widget.weather_cache:
+    class: Drupal\openmeteo_widget\Service\WeatherCache
+    arguments:
+      - '@cache.default'
+      - '@datetime.time'
+      - '@config.factory'
+      - '@openmeteo_widget.client'

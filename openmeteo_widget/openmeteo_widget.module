@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * Main module file for Open-Meteo Weather Widget.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function openmeteo_widget_help(string $route_name, RouteMatchInterface $route_match): string {
+  switch ($route_name) {
+    case 'help.page.openmeteo_widget':
+      return '<p>' . t('A weather widget that displays current weather and 7-day forecast using the Open-Meteo API.') . '</p>';
+  }
+  return '';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function openmeteo_widget_theme(array $existing, string $type, string $theme, string $path): array {
+  return [
+    'openmeteo_widget' => [
+      'variables' => [
+        'cities' => [],
+        'selected_city' => NULL,
+        'weather_data' => NULL,
+        'meteo_client' => NULL,
+      ],
+      'template' => 'openmeteo-widget',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function openmeteo_widget_cron(): void {
+  $cityManager = \Drupal::service('openmeteo_widget.city_manager');
+  $weatherCache = \Drupal::service('openmeteo_widget.weather_cache');
+  $config = \Drupal::config('openmeteo_widget.settings');
+
+  // Only run if caching is enabled.
+  if (!$config->get('enable_caching')) {
+    return;
+  }
+
+  // Get all cities and fetch weather data.
+  $cities = $cityManager->getAllCities();
+
+  foreach ($cities as $cityId => $city) {
+    $weatherCache->fetchAndCache(
+      $cityId,
+      (float) $city['latitude'],
+      (float) $city['longitude']
+    );
+  }
+
+  // Update last cron run time.
+  $weatherCache->updateLastUpdateTime();
+
+  \Drupal::logger('openmeteo_widget')->info(
+    'Cron updated weather data for @count cities.',
+    ['@count' => count($cities)]
+  );
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function openmeteo_widget_user_login($account): void {
+  // Migrate cookie preference to user data on login.
+  $request = \Drupal::request();
+  $cityId = $request->cookies->get('openmeteo_city');
+
+  if ($cityId) {
+    $cityManager = \Drupal::service('openmeteo_widget.city_manager');
+    $city = $cityManager->getCity($cityId);
+
+    if ($city) {
+      \Drupal::service('user.data')->set(
+        'openmeteo_widget',
+        $account->id(),
+        'selected_city',
+        $cityId
+      );
+    }
+  }
+}
