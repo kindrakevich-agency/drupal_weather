@@ -56,7 +56,7 @@ final class OpenMeteoClient {
       'current' => 'temperature_2m,relative_humidity_2m,precipitation_probability,wind_speed_10m,weather_code',
       'daily' => 'temperature_2m_max,temperature_2m_min,weather_code',
       'timezone' => 'auto',
-      'forecast_days' => 7,
+      'forecast_days' => 8,
     ]);
 
     try {
@@ -99,7 +99,7 @@ final class OpenMeteoClient {
     $current = $data['current'] ?? [];
     $daily = $data['daily'] ?? [];
 
-    // Process 7-day forecast.
+    // Process 8-day forecast.
     $forecast = [];
     if (!empty($daily['time']) && is_array($daily['time'])) {
       foreach ($daily['time'] as $index => $date) {

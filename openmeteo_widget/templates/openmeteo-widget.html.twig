@@ -64,8 +64,8 @@
       {{ meteo_client.getWeatherDescription(weather_data.current.weather_code) }}
     </div>
 
-    {# 7-Day Forecast #}
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+    {# 8-Day Forecast #}
+    <div class="grid grid-cols-4 grid-rows-2 gap-4">
       {% for day in weather_data.daily %}
         <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-gray-100 transition-colors cursor-pointer">
           <div class="text-sm font-medium mb-4">
@@ -75,7 +75,7 @@
             {% if use_openweather_icons %}
               <img src="{{ meteo_client.getOpenWeatherIconUrl(day.weather_code) }}"
                    alt="{{ meteo_client.getWeatherDescription(day.weather_code) }}"
-                   class="w-16 h-16 mx-auto">
+                   class="mx-auto">
             {% else %}
               {{ _self.weather_icon(meteo_client.getWeatherIcon(day.weather_code)) }}
             {% endif %}
