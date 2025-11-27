@@ -34,3 +34,12 @@ openmeteo_widget.fetch_now:
     _permission: 'administer site configuration'
   options:
     no_cache: TRUE
+
+openmeteo_widget.autocomplete:
+  path: '/openmeteo-widget/autocomplete/city'
+  defaults:
+    _controller: '\Drupal\openmeteo_widget\Controller\WeatherWidgetController::autocomplete'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    no_cache: TRUE

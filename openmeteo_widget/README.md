@@ -5,6 +5,7 @@ A production-ready Drupal 11 custom module that displays weather information usi
 ## Features
 
 - **Real-time Weather Data**: Fetches current weather and 7-day forecasts from Open-Meteo API
+- **Intelligent City Search**: Autocomplete city search with automatic coordinate filling using Open-Meteo Geocoding API
 - **Multi-City Support**: Configure multiple cities with easy management interface
 - **User Preferences**:
   - Authenticated users: City preference saved to user profile
@@ -77,21 +78,28 @@ Access the configuration form at: `/admin/config/services/openmeteo-widget`
 - **Fetch Weather Now**: Manual button to refresh all city data immediately
 
 **City Management:**
-- Add new cities with name, latitude, and longitude
-- Remove existing cities
-- First configured city becomes the default
+- **Smart City Search**: Start typing a city name and get instant autocomplete suggestions
+- **Automatic Coordinates**: Latitude and longitude are filled automatically when you select a city
+- **Manual Override**: Click on coordinate fields to edit manually if needed
+- **Remove Cities**: Check the "Remove" box for existing cities to delete them
+- **Default City**: The first configured city becomes the default for new visitors
 
-### Finding Coordinates
+### Adding Cities with Autocomplete
 
-To get latitude/longitude for cities:
-1. Visit https://open-meteo.com/
-2. Search for your city
-3. Copy the coordinates from the URL or map
+The module features intelligent city search powered by Open-Meteo's Geocoding API:
 
-Example coordinates:
-- Madrid, Spain: `40.4168, -3.7038`
-- New York, USA: `40.7128, -74.0060`
-- London, UK: `51.5074, -0.1278`
+1. **Start Typing**: Enter at least 2 characters in the "City Name" field
+2. **Select from Suggestions**: A dropdown will appear with matching cities showing:
+   - Full city name with country (e.g., "Madrid, Madrid, Spain")
+   - Coordinates preview
+3. **Auto-fill**: When you click a suggestion, coordinates are filled automatically
+4. **Keyboard Navigation**: Use arrow keys to navigate suggestions, Enter to select, Esc to close
+5. **Manual Entry**: Click coordinate fields if you prefer to enter them manually
+
+Example cities you can search for:
+- Type "Madrid" → Select "Madrid, Madrid, Spain"
+- Type "New York" → Select "New York, New York, United States"
+- Type "London" → Select "London, England, United Kingdom"
 
 ## Cron and Caching
 
@@ -382,6 +390,13 @@ For issues, questions, or contributions:
 - **Module Development**: [Your name/organization]
 
 ## Changelog
+
+### 1.1.0
+- **NEW**: Intelligent city autocomplete search powered by Open-Meteo Geocoding API
+- **NEW**: Automatic coordinate filling when selecting cities
+- **NEW**: Keyboard navigation for autocomplete suggestions (Arrow keys, Enter, Esc)
+- **IMPROVED**: Enhanced admin UI with readonly coordinate fields
+- **IMPROVED**: Manual override option for coordinates
 
 ### 1.0.0
 - Initial release

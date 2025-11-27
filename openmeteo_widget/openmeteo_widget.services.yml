@@ -6,6 +6,12 @@ services:
       - '@config.factory'
       - '@logger.factory'
 
+  openmeteo_widget.geocoding:
+    class: Drupal\openmeteo_widget\Service\GeocodingClient
+    arguments:
+      - '@http_client'
+      - '@logger.factory'
+
   openmeteo_widget.city_manager:
     class: Drupal\openmeteo_widget\Service\CityManager
     arguments:

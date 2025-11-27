@@ -9,3 +9,11 @@ weather_widget:
   css:
     theme:
       //cdn.tailwindcss.com: { type: external, minified: true }
+
+city_autocomplete:
+  version: 1.0
+  js:
+    js/city-autocomplete.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

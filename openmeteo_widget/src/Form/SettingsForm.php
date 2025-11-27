@@ -146,26 +146,53 @@ final class SettingsForm extends ConfigFormBase {
     $form['cities']['new_city'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Add New City'),
+      '#attached' => [
+        'library' => [
+          'openmeteo_widget/city_autocomplete',
+        ],
+      ],
     ];
 
     $form['cities']['new_city']['city_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('City Name'),
-      '#description' => $this->t('Example: Madrid, Spain'),
+      '#description' => $this->t('Start typing to search for a city. Coordinates will be filled automatically.'),
+      '#attributes' => [
+        'class' => ['city-autocomplete'],
+        'autocomplete' => 'off',
+        'data-autocomplete-url' => '/openmeteo-widget/autocomplete/city',
+      ],
     ];
 
-    $form['cities']['new_city']['city_latitude'] = [
+    $form['cities']['new_city']['coordinates_wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['form-item-coordinates-wrapper']],
+    ];
+
+    $form['cities']['new_city']['coordinates_wrapper']['city_latitude'] = [
       '#type' => 'number',
       '#title' => $this->t('Latitude'),
       '#step' => 0.0001,
-      '#description' => $this->t('Example: 40.4168'),
+      '#description' => $this->t('Auto-filled from city selection'),
+      '#attributes' => [
+        'class' => ['city-latitude'],
+        'readonly' => 'readonly',
+      ],
     ];
 
-    $form['cities']['new_city']['city_longitude'] = [
+    $form['cities']['new_city']['coordinates_wrapper']['city_longitude'] = [
       '#type' => 'number',
       '#title' => $this->t('Longitude'),
       '#step' => 0.0001,
-      '#description' => $this->t('Example: -3.7038'),
+      '#description' => $this->t('Auto-filled from city selection'),
+      '#attributes' => [
+        'class' => ['city-longitude'],
+        'readonly' => 'readonly',
+      ],
+    ];
+
+    $form['cities']['new_city']['help'] = [
+      '#markup' => '<p><small>' . $this->t('Or manually enter coordinates if you prefer.') . '</small></p>',
     ];
 
     return parent::buildForm($form, $form_state);

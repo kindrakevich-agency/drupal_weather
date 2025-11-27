@@ -7,6 +7,7 @@ namespace Drupal\openmeteo_widget\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\openmeteo_widget\Service\CityManager;
+use Drupal\openmeteo_widget\Service\GeocodingClient;
 use Drupal\openmeteo_widget\Service\OpenMeteoClient;
 use Drupal\openmeteo_widget\Service\WeatherCache;
 use Drupal\user\UserDataInterface;
@@ -33,6 +34,8 @@ final class WeatherWidgetController extends ControllerBase {
    *   The current user.
    * @param \Drupal\user\UserDataInterface $userData
    *   The user data service.
+   * @param \Drupal\openmeteo_widget\Service\GeocodingClient $geocodingClient
+   *   The geocoding client.
    */
   public function __construct(
     private readonly CityManager $cityManager,
@@ -40,6 +43,7 @@ final class WeatherWidgetController extends ControllerBase {
     private readonly OpenMeteoClient $meteoClient,
     private readonly AccountInterface $currentUser,
     private readonly UserDataInterface $userData,
+    private readonly GeocodingClient $geocodingClient,
   ) {}
 
   /**
@@ -52,6 +56,7 @@ final class WeatherWidgetController extends ControllerBase {
       $container->get('openmeteo_widget.client'),
       $container->get('current_user'),
       $container->get('user.data'),
+      $container->get('openmeteo_widget.geocoding'),
     );
   }
 
@@ -200,6 +205,27 @@ final class WeatherWidgetController extends ControllerBase {
       'results' => $results,
       'timestamp' => time(),
     ]);
+  }
+
+  /**
+   * Autocomplete endpoint for city search.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The request object.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON response with city suggestions.
+   */
+  public function autocomplete(Request $request): JsonResponse {
+    $query = $request->query->get('q', '');
+
+    if (strlen($query) < 2) {
+      return new JsonResponse([]);
+    }
+
+    $results = $this->geocodingClient->searchCities($query);
+
+    return new JsonResponse($results);
   }
 
 }
