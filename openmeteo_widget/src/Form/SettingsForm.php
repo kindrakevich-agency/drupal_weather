@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\openmeteo_widget\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\openmeteo_widget\Service\CityManager;
@@ -18,16 +20,22 @@ final class SettingsForm extends ConfigFormBase {
   /**
    * Constructs a SettingsForm object.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
    * @param \Drupal\openmeteo_widget\Service\CityManager $cityManager
    *   The city manager service.
    * @param \Drupal\openmeteo_widget\Service\WeatherCache $weatherCache
    *   The weather cache service.
    */
   public function __construct(
+    ConfigFactoryInterface $configFactory,
+    TypedConfigManagerInterface $typedConfigManager,
     private readonly CityManager $cityManager,
     private readonly WeatherCache $weatherCache,
   ) {
-    parent::__construct($this->configFactory());
+    parent::__construct($configFactory, $typedConfigManager);
   }
 
   /**
@@ -35,6 +43,8 @@ final class SettingsForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container): self {
     return new self(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('openmeteo_widget.city_manager'),
       $container->get('openmeteo_widget.weather_cache'),
     );
