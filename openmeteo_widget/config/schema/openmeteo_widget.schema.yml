@@ -11,6 +11,9 @@ openmeteo_widget.settings:
     enable_caching:
       type: boolean
       label: 'Enable Caching'
+    use_tailwind_cdn:
+      type: boolean
+      label: 'Use Tailwind CDN'
     last_cron_run:
       type: integer
       label: 'Last Cron Run Timestamp'

@@ -1,6 +1,7 @@
 api_endpoint: ''
 api_key: ''
 enable_caching: true
+use_tailwind_cdn: true
 last_cron_run: null
 cities:
   madrid:

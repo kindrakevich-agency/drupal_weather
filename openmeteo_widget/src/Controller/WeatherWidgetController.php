@@ -228,4 +228,102 @@ final class WeatherWidgetController extends ControllerBase {
     return new JsonResponse($results);
   }
 
+  /**
+   * Weather page display.
+   *
+   * @return array<string, mixed>
+   *   Render array for the weather page.
+   */
+  public function weatherPage(): array {
+    $cities = $this->cityManager->getAllCities();
+
+    if (empty($cities)) {
+      return [
+        '#markup' => $this->t('No cities configured. Please contact the site administrator.'),
+      ];
+    }
+
+    // Determine selected city from user preference or URL parameter.
+    $selectedCity = $this->getSelectedCityForPage($cities);
+
+    if (!$selectedCity) {
+      $selectedCity = $this->cityManager->getDefaultCity();
+    }
+
+    // Get weather data.
+    $weatherData = NULL;
+    if ($selectedCity) {
+      $weatherData = $this->weatherCache->getWeather(
+        $selectedCity['id'],
+        (float) $selectedCity['latitude'],
+        (float) $selectedCity['longitude']
+      );
+    }
+
+    // Build library attachments.
+    $libraries = ['openmeteo_widget/weather_widget'];
+
+    // Conditionally add Tailwind CDN based on settings.
+    $config = \Drupal::config('openmeteo_widget.settings');
+    if ($config->get('use_tailwind_cdn') ?? TRUE) {
+      $libraries[] = 'openmeteo_widget/weather_widget_tailwind';
+    }
+
+    return [
+      '#theme' => 'openmeteo_widget_page',
+      '#cities' => $cities,
+      '#selected_city' => $selectedCity,
+      '#weather_data' => $weatherData,
+      '#meteo_client' => $this->meteoClient,
+      '#attached' => [
+        'library' => $libraries,
+      ],
+      '#cache' => [
+        'max-age' => 3600,
+        'contexts' => ['user', 'cookies:openmeteo_city', 'url.query_args:city'],
+      ],
+    ];
+  }
+
+  /**
+   * Gets the selected city for the weather page.
+   *
+   * @param array<string, array<string, mixed>> $cities
+   *   All available cities.
+   *
+   * @return array<string, mixed>|null
+   *   The selected city or NULL.
+   */
+  private function getSelectedCityForPage(array $cities): ?array {
+    // Check URL parameter first.
+    $request = \Drupal::request();
+    $cityId = $request->query->get('city');
+    if ($cityId && isset($cities[$cityId])) {
+      return $cities[$cityId];
+    }
+
+    // For authenticated users, check user data.
+    if ($this->account->isAuthenticated()) {
+      $cityId = $this->userData->get(
+        'openmeteo_widget',
+        $this->account->id(),
+        'selected_city'
+      );
+
+      if ($cityId && isset($cities[$cityId])) {
+        return $cities[$cityId];
+      }
+    }
+
+    // For anonymous users, check cookie.
+    if ($request->cookies->has('openmeteo_city')) {
+      $cityId = $request->cookies->get('openmeteo_city');
+      if ($cityId && isset($cities[$cityId])) {
+        return $cities[$cityId];
+      }
+    }
+
+    return NULL;
+  }
+
 }

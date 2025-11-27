@@ -1,0 +1,175 @@
+# Ukrainian translation for Open-Meteo Weather Widget module
+# Copyright (c) 2025
+msgid ""
+msgstr ""
+"Project-Id-Version: Open-Meteo Weather Widget\n"
+"POT-Creation-Date: 2025-01-27 12:00+0000\n"
+"PO-Revision-Date: 2025-01-27 12:00+0000\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Open-Meteo Weather Widget Settings"
+msgstr "Налаштування Віджета Погоди Open-Meteo"
+
+msgid "API Settings"
+msgstr "Налаштування API"
+
+msgid "API Endpoint"
+msgstr "Кінцева точка API"
+
+msgid "Open-Meteo API endpoint. Leave empty to use default: https://api.open-meteo.com/v1/forecast"
+msgstr "Кінцева точка API Open-Meteo. Залиште порожнім для використання стандартного: https://api.open-meteo.com/v1/forecast"
+
+msgid "API Key"
+msgstr "Ключ API"
+
+msgid "API key (optional - Open-Meteo free tier does not require one)"
+msgstr "Ключ API (необов'язково - безкоштовний рівень Open-Meteo не вимагає його)"
+
+msgid "Caching Settings"
+msgstr "Налаштування Кешування"
+
+msgid "Enable caching"
+msgstr "Увімкнути кешування"
+
+msgid "Cache weather data for 3 hours to reduce API calls."
+msgstr "Кешувати дані про погоду протягом 3 годин для зменшення викликів API."
+
+msgid "Last cache update"
+msgstr "Останнє оновлення кешу"
+
+msgid "Last run: @time"
+msgstr "Останній запуск: @time"
+
+msgid "Never run"
+msgstr "Ніколи не запускався"
+
+msgid "Fetch weather now"
+msgstr "Отримати погоду зараз"
+
+msgid "Display Settings"
+msgstr "Налаштування Відображення"
+
+msgid "Use Tailwind CDN"
+msgstr "Використовувати Tailwind CDN"
+
+msgid "Load TailwindCSS from CDN for widget styling. Disable if your theme already includes Tailwind or you want to use custom styles."
+msgstr "Завантажити TailwindCSS з CDN для стилізації віджета. Вимкніть, якщо ваша тема вже включає Tailwind або ви хочете використовувати власні стилі."
+
+msgid "City Management"
+msgstr "Управління Містами"
+
+msgid "City Name"
+msgstr "Назва Міста"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Довгота"
+
+msgid "Actions"
+msgstr "Дії"
+
+msgid "No cities configured."
+msgstr "Міста не налаштовані."
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "Add New City"
+msgstr "Додати Нове Місто"
+
+msgid "Start typing to search for a city. Coordinates will be filled automatically."
+msgstr "Почніть вводити для пошуку міста. Координати будуть заповнені автоматично."
+
+msgid "Auto-filled from city selection"
+msgstr "Автоматично заповнено з вибору міста"
+
+msgid "Or manually enter coordinates if you prefer."
+msgstr "Або введіть координати вручну, якщо бажаєте."
+
+msgid "City removed successfully."
+msgstr "Місто успішно видалено."
+
+msgid "City added successfully."
+msgstr "Місто успішно додано."
+
+msgid "Fetched weather data for @count cities."
+msgstr "Отримано дані про погоду для @count міст."
+
+msgid "Select City"
+msgstr "Вибрати Місто"
+
+msgid "Humidity"
+msgstr "Вологість"
+
+msgid "Precipitation"
+msgstr "Опади"
+
+msgid "Wind"
+msgstr "Вітер"
+
+msgid "Unable to load weather data. Please try again later."
+msgstr "Не вдається завантажити дані про погоду. Будь ласка, спробуйте пізніше."
+
+msgid "Weather"
+msgstr "Погода"
+
+msgid "No cities configured. Please contact the site administrator."
+msgstr "Міста не налаштовані. Будь ласка, зв'яжіться з адміністратором сайту."
+
+msgid "No cities configured. Please configure cities in the <a href=\"@url\">settings</a>."
+msgstr "Міста не налаштовані. Будь ласка, налаштуйте міста в <a href=\"@url\">налаштуваннях</a>."
+
+# Weather descriptions
+msgid "Clear sky"
+msgstr "Ясне небо"
+
+msgid "Mainly clear"
+msgstr "Переважно ясно"
+
+msgid "Partly cloudy"
+msgstr "Мінлива хмарність"
+
+msgid "Overcast"
+msgstr "Похмуро"
+
+msgid "Foggy"
+msgstr "Туман"
+
+msgid "Drizzle"
+msgstr "Мряка"
+
+msgid "Freezing drizzle"
+msgstr "Крижана мряка"
+
+msgid "Rain"
+msgstr "Дощ"
+
+msgid "Freezing rain"
+msgstr "Крижаний дощ"
+
+msgid "Snow"
+msgstr "Сніг"
+
+msgid "Snow grains"
+msgstr "Снігова крупа"
+
+msgid "Rain showers"
+msgstr "Зливи"
+
+msgid "Snow showers"
+msgstr "Снігопад"
+
+msgid "Thunderstorm"
+msgstr "Гроза"
+
+msgid "Thunderstorm with hail"
+msgstr "Гроза з градом"
+
+msgid "Unknown"
+msgstr "Невідомо"

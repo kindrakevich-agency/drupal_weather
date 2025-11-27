@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Template for Open-Meteo Weather Widget Page.
+ *
+ * Available variables:
+ * - cities: Array of all configured cities
+ * - selected_city: Currently selected city data
+ * - weather_data: Weather data for the selected city
+ * - meteo_client: OpenMeteoClient service for icon/description mapping
+ */
+#}
+<div class="weather-page-wrapper">
+  <div class="container mx-auto p-4">
+    {% include '@openmeteo_widget/openmeteo-widget.html.twig' %}
+  </div>
+</div>

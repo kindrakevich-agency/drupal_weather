@@ -43,3 +43,11 @@ openmeteo_widget.autocomplete:
     _permission: 'administer site configuration'
   options:
     no_cache: TRUE
+
+openmeteo_widget.weather_page:
+  path: '/weather'
+  defaults:
+    _controller: '\Drupal\openmeteo_widget\Controller\WeatherWidgetController::weatherPage'
+    _title: 'Weather'
+  requirements:
+    _access: 'TRUE'

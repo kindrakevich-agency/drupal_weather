@@ -118,6 +118,19 @@ final class SettingsForm extends ConfigFormBase {
       '#submit' => ['::fetchNowSubmit'],
     ];
 
+    $form['display'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Display Settings'),
+      '#open' => TRUE,
+    ];
+
+    $form['display']['use_tailwind_cdn'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use Tailwind CDN'),
+      '#default_value' => $config->get('use_tailwind_cdn') ?? TRUE,
+      '#description' => $this->t('Load TailwindCSS from CDN for widget styling. Disable if your theme already includes Tailwind or you want to use custom styles.'),
+    ];
+
     $form['cities'] = [
       '#type' => 'details',
       '#title' => $this->t('City Management'),
@@ -182,7 +195,7 @@ final class SettingsForm extends ConfigFormBase {
     $form['cities']['new_city']['coordinates_wrapper']['city_latitude'] = [
       '#type' => 'number',
       '#title' => $this->t('Latitude'),
-      '#step' => 0.0001,
+      '#step' => 'any',
       '#description' => $this->t('Auto-filled from city selection'),
       '#attributes' => [
         'class' => ['city-latitude'],
@@ -193,7 +206,7 @@ final class SettingsForm extends ConfigFormBase {
     $form['cities']['new_city']['coordinates_wrapper']['city_longitude'] = [
       '#type' => 'number',
       '#title' => $this->t('Longitude'),
-      '#step' => 0.0001,
+      '#step' => 'any',
       '#description' => $this->t('Auto-filled from city selection'),
       '#attributes' => [
         'class' => ['city-longitude'],
@@ -218,6 +231,7 @@ final class SettingsForm extends ConfigFormBase {
     $config->set('api_endpoint', $form_state->getValue('api_endpoint'))
       ->set('api_key', $form_state->getValue('api_key'))
       ->set('enable_caching', (bool) $form_state->getValue('enable_caching'))
+      ->set('use_tailwind_cdn', (bool) $form_state->getValue('use_tailwind_cdn'))
       ->save();
 
     // Handle city removal.

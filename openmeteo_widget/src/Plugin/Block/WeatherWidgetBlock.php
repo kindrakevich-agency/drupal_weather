@@ -109,6 +109,15 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
       );
     }
 
+    // Build library attachments.
+    $libraries = ['openmeteo_widget/weather_widget'];
+
+    // Conditionally add Tailwind CDN based on settings.
+    $config = \Drupal::config('openmeteo_widget.settings');
+    if ($config->get('use_tailwind_cdn') ?? TRUE) {
+      $libraries[] = 'openmeteo_widget/weather_widget_tailwind';
+    }
+
     return [
       '#theme' => 'openmeteo_widget',
       '#cities' => $cities,
@@ -116,13 +125,12 @@ final class WeatherWidgetBlock extends BlockBase implements ContainerFactoryPlug
       '#weather_data' => $weatherData,
       '#meteo_client' => $this->meteoClient,
       '#attached' => [
-        'library' => [
-          'openmeteo_widget/weather_widget',
-        ],
+        'library' => $libraries,
       ],
       '#cache' => [
         'max-age' => 3600,
         'contexts' => ['user', 'cookies:openmeteo_city'],
+        'tags' => ['config:openmeteo_widget.settings'],
       ],
     ];
   }

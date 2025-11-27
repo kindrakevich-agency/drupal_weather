@@ -52,10 +52,11 @@
           input.value = city.label;
           currentCityData = city;
 
-          // Fill in coordinates.
+          // Fill in coordinates - ensure dot as decimal separator.
           if (latitudeField && longitudeField) {
-            latitudeField.value = city.latitude;
-            longitudeField.value = city.longitude;
+            // Convert to string with dot as decimal separator
+            latitudeField.value = Number(city.latitude).toFixed(6).replace(',', '.');
+            longitudeField.value = Number(city.longitude).toFixed(6).replace(',', '.');
 
             // Remove readonly to allow form submission.
             latitudeField.removeAttribute('readonly');
@@ -104,7 +105,10 @@
             cityName.style.fontWeight = 'bold';
 
             const coordinates = document.createElement('div');
-            coordinates.textContent = 'Lat: ' + city.latitude.toFixed(4) + ', Lon: ' + city.longitude.toFixed(4);
+            // Ensure dot as decimal separator (not comma)
+            const lat = Number(city.latitude).toFixed(4).replace(',', '.');
+            const lon = Number(city.longitude).toFixed(4).replace(',', '.');
+            coordinates.textContent = 'Lat: ' + lat + ', Lon: ' + lon;
             coordinates.style.fontSize = '0.85em';
             coordinates.style.color = '#666';
 

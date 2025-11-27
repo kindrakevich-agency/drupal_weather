@@ -34,6 +34,15 @@ function openmeteo_widget_theme(array $existing, string $type, string $theme, st
       ],
       'template' => 'openmeteo-widget',
     ],
+    'openmeteo_widget_page' => [
+      'variables' => [
+        'cities' => [],
+        'selected_city' => NULL,
+        'weather_data' => NULL,
+        'meteo_client' => NULL,
+      ],
+      'template' => 'openmeteo-widget-page',
+    ],
   ];
 }
 

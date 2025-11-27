@@ -6,6 +6,9 @@ weather_widget:
     - core/drupal
     - core/once
     - core/drupalSettings
+
+weather_widget_tailwind:
+  version: 1.0
   css:
     theme:
       //cdn.tailwindcss.com: { type: external, minified: true }

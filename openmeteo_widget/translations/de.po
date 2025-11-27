@@ -1,0 +1,175 @@
+# German translation for Open-Meteo Weather Widget module
+# Copyright (c) 2025
+msgid ""
+msgstr ""
+"Project-Id-Version: Open-Meteo Weather Widget\n"
+"POT-Creation-Date: 2025-01-27 12:00+0000\n"
+"PO-Revision-Date: 2025-01-27 12:00+0000\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Open-Meteo Weather Widget Settings"
+msgstr "Open-Meteo Wetter-Widget Einstellungen"
+
+msgid "API Settings"
+msgstr "API-Einstellungen"
+
+msgid "API Endpoint"
+msgstr "API-Endpunkt"
+
+msgid "Open-Meteo API endpoint. Leave empty to use default: https://api.open-meteo.com/v1/forecast"
+msgstr "Open-Meteo API-Endpunkt. Leer lassen, um Standard zu verwenden: https://api.open-meteo.com/v1/forecast"
+
+msgid "API Key"
+msgstr "API-Schlüssel"
+
+msgid "API key (optional - Open-Meteo free tier does not require one)"
+msgstr "API-Schlüssel (optional - Open-Meteo kostenlose Stufe erfordert keinen)"
+
+msgid "Caching Settings"
+msgstr "Cache-Einstellungen"
+
+msgid "Enable caching"
+msgstr "Caching aktivieren"
+
+msgid "Cache weather data for 3 hours to reduce API calls."
+msgstr "Wetterdaten 3 Stunden lang zwischenspeichern, um API-Aufrufe zu reduzieren."
+
+msgid "Last cache update"
+msgstr "Letzte Cache-Aktualisierung"
+
+msgid "Last run: @time"
+msgstr "Zuletzt ausgeführt: @time"
+
+msgid "Never run"
+msgstr "Nie ausgeführt"
+
+msgid "Fetch weather now"
+msgstr "Wetter jetzt abrufen"
+
+msgid "Display Settings"
+msgstr "Anzeigeeinstellungen"
+
+msgid "Use Tailwind CDN"
+msgstr "Tailwind CDN verwenden"
+
+msgid "Load TailwindCSS from CDN for widget styling. Disable if your theme already includes Tailwind or you want to use custom styles."
+msgstr "TailwindCSS von CDN für Widget-Styling laden. Deaktivieren, wenn Ihr Theme bereits Tailwind enthält oder Sie benutzerdefinierte Stile verwenden möchten."
+
+msgid "City Management"
+msgstr "Stadtverwaltung"
+
+msgid "City Name"
+msgstr "Stadtname"
+
+msgid "Latitude"
+msgstr "Breitengrad"
+
+msgid "Longitude"
+msgstr "Längengrad"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "No cities configured."
+msgstr "Keine Städte konfiguriert."
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Add New City"
+msgstr "Neue Stadt hinzufügen"
+
+msgid "Start typing to search for a city. Coordinates will be filled automatically."
+msgstr "Beginnen Sie mit der Eingabe, um nach einer Stadt zu suchen. Koordinaten werden automatisch ausgefüllt."
+
+msgid "Auto-filled from city selection"
+msgstr "Automatisch aus Stadtauswahl ausgefüllt"
+
+msgid "Or manually enter coordinates if you prefer."
+msgstr "Oder geben Sie Koordinaten manuell ein, wenn Sie möchten."
+
+msgid "City removed successfully."
+msgstr "Stadt erfolgreich entfernt."
+
+msgid "City added successfully."
+msgstr "Stadt erfolgreich hinzugefügt."
+
+msgid "Fetched weather data for @count cities."
+msgstr "Wetterdaten für @count Städte abgerufen."
+
+msgid "Select City"
+msgstr "Stadt auswählen"
+
+msgid "Humidity"
+msgstr "Luftfeuchtigkeit"
+
+msgid "Precipitation"
+msgstr "Niederschlag"
+
+msgid "Wind"
+msgstr "Wind"
+
+msgid "Unable to load weather data. Please try again later."
+msgstr "Wetterdaten können nicht geladen werden. Bitte versuchen Sie es später erneut."
+
+msgid "Weather"
+msgstr "Wetter"
+
+msgid "No cities configured. Please contact the site administrator."
+msgstr "Keine Städte konfiguriert. Bitte kontaktieren Sie den Site-Administrator."
+
+msgid "No cities configured. Please configure cities in the <a href=\"@url\">settings</a>."
+msgstr "Keine Städte konfiguriert. Bitte konfigurieren Sie Städte in den <a href=\"@url\">Einstellungen</a>."
+
+# Weather descriptions
+msgid "Clear sky"
+msgstr "Klarer Himmel"
+
+msgid "Mainly clear"
+msgstr "Überwiegend klar"
+
+msgid "Partly cloudy"
+msgstr "Teilweise bewölkt"
+
+msgid "Overcast"
+msgstr "Bedeckt"
+
+msgid "Foggy"
+msgstr "Neblig"
+
+msgid "Drizzle"
+msgstr "Nieselregen"
+
+msgid "Freezing drizzle"
+msgstr "Gefrierender Nieselregen"
+
+msgid "Rain"
+msgstr "Regen"
+
+msgid "Freezing rain"
+msgstr "Gefrierender Regen"
+
+msgid "Snow"
+msgstr "Schnee"
+
+msgid "Snow grains"
+msgstr "Schneegriesel"
+
+msgid "Rain showers"
+msgstr "Regenschauer"
+
+msgid "Snow showers"
+msgstr "Schneeschauer"
+
+msgid "Thunderstorm"
+msgstr "Gewitter"
+
+msgid "Thunderstorm with hail"
+msgstr "Gewitter mit Hagel"
+
+msgid "Unknown"
+msgstr "Unbekannt"
